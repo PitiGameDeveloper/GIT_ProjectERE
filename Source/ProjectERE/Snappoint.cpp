@@ -9,7 +9,7 @@ ASnappoint::ASnappoint()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
+	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Direction"));
 	SetRootComponent(Arrow);
 
 }
