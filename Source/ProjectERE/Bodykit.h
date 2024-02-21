@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Snappoint.h"
+#include "Components/ArrowComponent.h" 
+
 #include "Bodykit.generated.h"
 
 
@@ -31,6 +33,12 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "BodyKit Mesh")
 	UStaticMeshComponent* BodyMesh = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Snappoints")
+	TArray<UArrowComponent*> Snappoints;
+
+	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
+	int SnappointsNumber;
+
 
 
 protected:
@@ -41,7 +49,6 @@ public:
 
 private:
 
-	UPROPERTY()
-	TArray<ASnappoint*> Snappoints;
+	
 
 };

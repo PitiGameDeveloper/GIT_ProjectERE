@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/ArrowComponent.h" 
 #include "Snappoint.h"
 #include "Gadget.generated.h"
 
@@ -20,7 +21,7 @@ public:
 	UStaticMeshComponent* GadgetMesh;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Gadget Snappoint")
-	ASnappoint* Snappoint;
+	UArrowComponent* Snappoint;
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,5 +30,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void Link();
 
 };

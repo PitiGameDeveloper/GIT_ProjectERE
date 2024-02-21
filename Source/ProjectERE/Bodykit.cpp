@@ -8,8 +8,14 @@ ABodykit::ABodykit()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT(" Bodykit")); 
+	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bodykit")); 
 	SetRootComponent(BodyMesh);
+
+	for (int i = 0; i < SnappointsNumber; i++)
+	{
+		UArrowComponent* Snappoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
+		Snappoints.Add(Snappoint);
+	}
 
 }
 

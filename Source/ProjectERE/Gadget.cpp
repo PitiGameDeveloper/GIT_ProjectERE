@@ -25,3 +25,8 @@ void AGadget::Tick(float DeltaTime)
 
 }
 
+void AGadget::Link()
+{
+
+}
+
