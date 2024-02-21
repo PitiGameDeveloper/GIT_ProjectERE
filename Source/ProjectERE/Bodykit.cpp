@@ -10,11 +10,16 @@ ABodykit::ABodykit()
 	PrimaryActorTick.bCanEverTick = true;
 	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bodykit")); 
 	SetRootComponent(BodyMesh);
+	SnappointsNumber = 1;
 
 	for (int i = 0; i < SnappointsNumber; i++)
 	{
-		UArrowComponent* Snappoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
-		Snappoints.Add(Snappoint);
+		UArrowComponent* Snappoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Snappoint"));
+		if (Snappoint)
+		{
+			Snappoint->AttachToComponent(BodyMesh, FAttachmentTransformRules::KeepRelativeTransform);
+			Snappoints.Add(Snappoint);
+		}
 	}
 
 }
@@ -24,6 +29,42 @@ void ABodykit::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ABodykit::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	AddSnappoints();
+
+}
+#if WITH_EDITOR
+void ABodykit::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	SnappointsNumber = FMath::Max(SnappointsNumber, 0);
+
+	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(ABodykit, SnappointsNumber))
+	{
+		if (GetWorld() && !GetWorld()->IsPlayInEditor())
+		{
+			for (TObjectIterator<UBlueprint> Itr; Itr; ++Itr)
+			{
+				if (Itr->GeneratedClass == GetClass())
+				{
+					Itr->MarkPackageDirty();
+				}
+			}
+		}
+	}
+
+}
+#endif
+
+void ABodykit::AddSnappoints()
+{
+
 }
 
 // Called every frame

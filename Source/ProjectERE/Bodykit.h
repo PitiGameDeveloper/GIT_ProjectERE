@@ -36,13 +36,24 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Snappoints")
 	TArray<UArrowComponent*> Snappoints;
 
-	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "BodyKit Stats")
 	int SnappointsNumber;
 
 
 
 protected:
+
 	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
+
+	void AddSnappoints();
 
 public:	
 	virtual void Tick(float DeltaTime) override;
