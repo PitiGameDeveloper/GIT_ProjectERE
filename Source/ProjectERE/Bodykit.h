@@ -19,7 +19,7 @@ public:
 	ABodykit();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Bodykit name")
-	FString BodyName;
+	FName BodyName;
 
 	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
 	int Healthpoints;
@@ -39,6 +39,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "BodyKit Stats")
 	int SnappointsNumber;
 
+	
 
 
 protected:
@@ -47,10 +48,11 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	
 
-#if WITH_EDITOR
+/*#if WITH_EDITOR
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
-#endif
+#endif*/
 
 
 	void AddSnappoints();

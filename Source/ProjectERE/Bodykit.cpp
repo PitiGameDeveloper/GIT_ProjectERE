@@ -2,6 +2,10 @@
 
 
 #include "Bodykit.h"
+#include "Components/ArrowComponent.h"
+#include "Engine/World.h"
+#include "Engine/DataTable.h"
+#include "UObject/UObjectIterator.h"
 
 // Sets default values
 ABodykit::ABodykit()
@@ -10,17 +14,7 @@ ABodykit::ABodykit()
 	PrimaryActorTick.bCanEverTick = true;
 	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bodykit")); 
 	SetRootComponent(BodyMesh);
-	SnappointsNumber = 1;
-
-	for (int i = 0; i < SnappointsNumber; i++)
-	{
-		UArrowComponent* Snappoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Snappoint"));
-		if (Snappoint)
-		{
-			Snappoint->AttachToComponent(BodyMesh, FAttachmentTransformRules::KeepRelativeTransform);
-			Snappoints.Add(Snappoint);
-		}
-	}
+	
 
 }
 
@@ -35,9 +29,12 @@ void ABodykit::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	AddSnappoints();
-
+	if (BodyName != NAME_None)
+	{
+		AddSnappoints();
+	}
 }
+/*
 #if WITH_EDITOR
 void ABodykit::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
@@ -60,11 +57,11 @@ void ABodykit::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
 	}
 
 }
-#endif
+#endif*/
 
 void ABodykit::AddSnappoints()
 {
-
+	
 }
 
 // Called every frame
