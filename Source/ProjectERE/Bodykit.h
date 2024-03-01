@@ -30,14 +30,12 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
 	int Tier;
 
-	UPROPERTY(VisibleAnywhere, Category = "BodyKit Mesh")
-	UStaticMeshComponent* BodyMesh = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = "BodyKit Mesh")
+	TObjectPtr<USkeletalMeshComponent> BodyMesh = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Snappoints")
-	TArray<UArrowComponent*> Snappoints;
+	UPROPERTY(VisibleAnywhere, Category = "Snappoints")
+	TArray<USkeletalMeshSocket*> Snappoints;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "BodyKit Stats")
-	int SnappointsNumber;
 
 	
 

@@ -12,7 +12,7 @@ ABodykit::ABodykit()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bodykit")); 
+	BodyMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Bodykit")); 
 	SetRootComponent(BodyMesh);
 	
 
@@ -28,11 +28,6 @@ void ABodykit::BeginPlay()
 void ABodykit::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
-
-	if (BodyName != NAME_None)
-	{
-		AddSnappoints();
-	}
 }
 /*
 #if WITH_EDITOR
@@ -61,7 +56,7 @@ void ABodykit::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
 
 void ABodykit::AddSnappoints()
 {
-	
+
 }
 
 // Called every frame
