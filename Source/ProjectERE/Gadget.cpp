@@ -3,14 +3,6 @@
 
 #include "Gadget.h"
 
-// Sets default values
-AGadget::AGadget()
-{
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-}
-
 // Called when the game starts or when spawned
 void AGadget::BeginPlay()
 {
@@ -25,7 +17,7 @@ void AGadget::Tick(float DeltaTime)
 
 }
 
-void AGadget::Link()
+void AGadget::Attatch()
 {
 
 }

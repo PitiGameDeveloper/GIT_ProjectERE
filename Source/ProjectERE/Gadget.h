@@ -8,20 +8,16 @@
 #include "Snappoint.h"
 #include "Gadget.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class PROJECTERE_API AGadget : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
-	AGadget();
 
-	UPROPERTY(VisibleAnywhere, Category = "Gadget Mesh")
-	UStaticMeshComponent* GadgetMesh;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh")
+	class USkeletalMeshComponent* SkeletalMeshComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Gadget Snappoint")
-	UArrowComponent* Snappoint;
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,6 +27,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void Link();
+	void Attatch();
 
 };
