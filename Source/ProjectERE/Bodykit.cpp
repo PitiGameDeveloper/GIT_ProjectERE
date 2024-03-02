@@ -12,8 +12,11 @@ ABodykit::ABodykit()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	BodyMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Bodykit")); 
-	SetRootComponent(BodyMesh);
+
+	// Crear el componente Skeletal Mesh y adjuntarlo al RootComponent
+    SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMeshComponent"));
+    RootComponent = SkeletalMeshComponent;
+
 	
 
 }
@@ -22,41 +25,21 @@ ABodykit::ABodykit()
 void ABodykit::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 	
 }
 
 void ABodykit::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
-}
-/*
-#if WITH_EDITOR
-void ABodykit::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
-{
-	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	SnappointsNumber = FMath::Max(SnappointsNumber, 0);
-
-	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(ABodykit, SnappointsNumber))
+	if (IsValid(SkeletalMeshComponent->SkeletalMesh))
 	{
-		if (GetWorld() && !GetWorld()->IsPlayInEditor())
-		{
-			for (TObjectIterator<UBlueprint> Itr; Itr; ++Itr)
-			{
-				if (Itr->GeneratedClass == GetClass())
-				{
-					Itr->MarkPackageDirty();
-				}
-			}
-		}
+		USkeletalMesh* SkeletalMesh = SkeletalMeshComponent->SkeletalMesh;
+		int socketsNumber = SkeletalMesh->NumSockets();
+		UE_LOG(LogTemp, Log, TEXT("Num de sokets = %d"), socketsNumber);
 	}
-
-}
-#endif*/
-
-void ABodykit::AddSnappoints()
-{
-
 }
 
 // Called every frame

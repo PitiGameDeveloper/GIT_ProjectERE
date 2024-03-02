@@ -18,9 +18,6 @@ class PROJECTERE_API ABodykit : public AActor
 public:	
 	ABodykit();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Bodykit name")
-	FName BodyName;
-
 	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
 	int Healthpoints;
 
@@ -30,14 +27,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "BodyKit Stats")
 	int Tier;
 
-	UPROPERTY(EditDefaultsOnly, Category = "BodyKit Mesh")
-	TObjectPtr<USkeletalMeshComponent> BodyMesh = nullptr;
-
 	UPROPERTY(VisibleAnywhere, Category = "Snappoints")
 	TArray<USkeletalMeshSocket*> Snappoints;
 
-
-	
 
 
 protected:
@@ -46,14 +38,10 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	// Skeletal Mesh Component para representar el modelo del coche
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh")
+	class USkeletalMeshComponent* SkeletalMeshComponent;
 	
-
-/*#if WITH_EDITOR
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
-#endif*/
-
-
-	void AddSnappoints();
 
 public:	
 	virtual void Tick(float DeltaTime) override;
